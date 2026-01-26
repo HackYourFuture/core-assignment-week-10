@@ -13,7 +13,7 @@ export async function main() {
   }
 
   const cocktailName = process.argv[2];
-  const url = `${BASE_URL}/search.php?s=${cocktailName}`;
+  const url1 = `${BASE_URL}/search.php?s=${cocktailName}`;
 
   const __dirname = import.meta.dirname;
   const outPath = path.join(__dirname, `../output/${cocktailName}.md`);
