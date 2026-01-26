@@ -1,37 +1,43 @@
 import fs from 'fs/promises';
 import { startVitest } from 'vitest/node';
+import path from 'path';
 
 const __dirname = import.meta.dirname;
-process.chdir(__dirname);
-
-const outputFile = 'temp.json';
+const reportPath = path.join(__dirname, 'report.json');
+const reportFileName = 'report.json';
 
 await startVitest(
   'test',
   [], // CLI filters
   {
     include: ['../**/*.test.js'],
-    reporters: ['json', 'default'],
-    outputFile: outputFile,
+    reporters: ['json'],
+    outputFile: reportPath,
     watch: false,
   }, // override test config
   {}, // override Vite config
   {} // custom Vitest options
 );
 
-const reportContent = await fs.readFile(outputFile, 'utf-8');
-await fs.unlink(outputFile).catch(() => {});
+const reportContent = await fs.readFile(reportFileName, 'utf-8');
+await fs.unlink(reportFileName);
 
 try {
   const { testResults } = JSON.parse(reportContent);
   let testCount = 0;
   let passedCount = 0;
+
   for (const result of testResults) {
     for (const assertionResult of result.assertionResults) {
-      const { status } = assertionResult;
+      const { title, status } = assertionResult;
+      let icon;
       if (status == 'passed') {
+        icon = '✅';
         passedCount++;
+      } else {
+        icon = '❌';
       }
+      console.log(`${icon} ${title}`);
       testCount++;
     }
   }

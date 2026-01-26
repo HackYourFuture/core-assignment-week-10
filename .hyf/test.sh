@@ -2,6 +2,5 @@
 set -euo pipefail
 
 # Run the Node.js tester and capture stdout/stderr to the expected output file
-cd ..
-/usr/bin/env npm install
-/usr/bin/env node .hyf/tester.js
+cd .. && /usr/bin/env npm install
+cd .hyf && NO_COLOR=true /usr/bin/env node tester.js
