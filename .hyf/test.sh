@@ -2,4 +2,6 @@
 set -euo pipefail
 
 # Run the Node.js tester and capture stdout/stderr to the expected output file
-/usr/bin/env node tester.js
+cd ..
+/usr/bin/env npm install
+/usr/bin/env node .hyf/tester.js
