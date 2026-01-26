@@ -16,7 +16,7 @@ export async function main() {
   const url = `${BASE_URL}/search.php?s=${cocktailName}`;
 
   const __dirname = import.meta.dirname;
-  const outPath = path.join(__dirname, `../output/${cocktailName}.md`);
+  const outPathx = path.join(__dirname, `../output/${cocktailName}.md`);
 
   try {
     // 1. Fetch data from the API at the given URL
