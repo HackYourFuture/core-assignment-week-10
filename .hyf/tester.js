@@ -4,7 +4,6 @@ import { startVitest } from 'vitest/node';
 
 const __dirname = import.meta.dirname;
 const reportPath = path.join(__dirname, 'report.json');
-const reportFileName = 'report.json';
 
 await startVitest(
   'test',
@@ -19,8 +18,8 @@ await startVitest(
   {} // custom Vitest options
 );
 
-const reportContent = await fs.readFile(reportFileName, 'utf-8');
-await fs.unlink(reportFileName);
+const reportContent = await fs.readFile(reportPath, 'utf-8');
+await fs.unlink(reportPath);
 
 try {
   const { testResults } = JSON.parse(reportContent);
@@ -32,13 +31,12 @@ try {
   const passingScore = Number(process.env.PASSING_SCORE || 50);
 
   for (const result of testResults) {
-    for (const assertionResult of result.assertionResults) {
-      const { title, status } = assertionResult;
+    for (const { title, status } of result.assertionResults) {
       const match = title.match(/^\[(\d+)]/);
       const points = match ? Number(match[1]) || 1 : 1;
       maxPoints += points;
       let icon;
-      if (status == 'passed') {
+      if (status === 'passed') {
         icon = '✅';
         earnedPoints += points;
       } else {
@@ -48,7 +46,7 @@ try {
     }
   }
 
-  console.log(`\nScore: ${earnedPoints} of ${maxPoints}`);
+  console.log(`\nRating: ${earnedPoints} of ${maxPoints}`);
 
   const totalScore = (earnedPoints / maxPoints) * 100;
 
