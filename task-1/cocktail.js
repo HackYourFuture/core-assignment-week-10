@@ -8,7 +8,7 @@ const BASE_URL = 'https://www.thecocktaildb.com/api/json/v1/1';
 
 export async function main() {
   if (process.argv.length < 3) {
-    console.log('Please provide a cocktail name as a command line argument.');
+    console.error('Please provide a cocktail name as a command line argument.');
     return;
   }
 
