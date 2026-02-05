@@ -8,7 +8,8 @@ Thumbs.db
 .hyf/test-output.txt
 
 # Editor and IDE settings
-.vscode/
+# Commit .vscode with settings to disable GitHub Copilot inline suggestions
+# .vscode/
 .idea/
 *.iml
 *.code-workspace
