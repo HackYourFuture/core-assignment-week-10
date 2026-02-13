@@ -9,7 +9,7 @@ Thumbs.db
 
 # Editor and IDE settings
 # Commit .vscode with settings to disable GitHub Copilot inline suggestions
-# .vscode/
+.vscode/
 .idea/
 *.iml
 *.code-workspace
@@ -157,3 +157,5 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+**/*.solution.js
