@@ -2,7 +2,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import { beforeAll, describe, expect, test, vi } from 'vitest';
 
-import { main } from '../cocktail.solution..js';
+import { main } from '../cocktail.js';
 
 import { data } from './drinks.js';
 
