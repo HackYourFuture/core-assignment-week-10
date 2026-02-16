@@ -1,7 +1,7 @@
 // Change base URL for API requests to the local IP of the Post Central API server
 const BASE_URL = 'http://localhost:3000';
 
-// Stub error for unimplemented functions - gives students a clear error message
+// Stub error for unimplemented functions - gives trainees a clear error message
 const NOT_IMPLEMENTED = new Error('Not implemented');
 
 // ============================================================================

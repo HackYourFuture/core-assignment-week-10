@@ -1,21 +1,22 @@
 /**
  * Vitest tests for Complete CRUD Operations
- * Tests the student's complete implementation of all CRUD functions
+ * Tests the trainee's complete implementation of all CRUD functions
  *
- * Uses mocked fetch to verify students are making correct API calls
+ * Uses mocked fetch to verify trainees are making correct API calls
  * without requiring a running API server.
  *
- * NOTE: Change the import path to test student code:
+ * NOTE: Change the import path to test trainee code:
  * - Testing starter: import from '../services.js'
  * - Testing solution: import from '../services-solution.js'
  */
 
 import { existsSync } from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-const __dirname = new URL('.', import.meta.url).pathname; // Get current directory path
-const studentFetchersPath = path.join(__dirname, '../src/services.js');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const traineeFetchersPath = path.join(__dirname, '../src/services.js');
 const solutionFetchersPath = path.join(
   __dirname,
   '../src/services-solution.js'
@@ -34,7 +35,7 @@ const {
   updatePost,
 } = solutionExists
   ? await import(solutionFetchersPath)
-  : await import(studentFetchersPath);
+  : await import(traineeFetchersPath);
 
 describe('Complete CRUD Operations', () => {
   let fetchMock;
