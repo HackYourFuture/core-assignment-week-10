@@ -14,7 +14,7 @@ export default defineConfig({
     reporters: ['verbose'],
 
     // Include test files
-    include: ['task-*/tests/**/*.test.js'],
+    include: ['task-1/tests/**/*.test.js', 'task-2/post-cli/tests/**/*.test.js'],
 
     // Global setup - you can add setup/teardown hooks here if needed
     globals: true,

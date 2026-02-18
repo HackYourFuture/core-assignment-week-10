@@ -5,8 +5,13 @@
   "scripts": {
     "test": "vitest",
     "test:run": "vitest run",
+    "test:task1": "vitest run task-1/tests",
+    "test:task2": "vitest run task-2/post-cli/tests",
     "test:cocktail": "vitest run cocktail",
-    "postinstall": "node .hyf/postinstall/postinstall.js"
+    "test:me": "vitest run test-get -t getMe",
+    "test:get": "vitest run test-get",
+    "test:post": "vitest run test-post",
+    "test:crud": "vitest run test-crud"
   },
   "keywords": [],
   "author": "HackYourFuture",
