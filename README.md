@@ -20,4 +20,4 @@ See [task-1/README.md](task-1/README.md) for full instructions.
 
 Implement the service functions that connect a CLI app to a REST API server. You will make authenticated HTTP requests (GET, POST, PUT, DELETE) using `fetch` and JWT tokens.
 
-See [task-2/post-cli/README.md](task-2/post-cli/README.md) for full instructions.
+See [task-2/README.md](task-2/README.md) for full instructions.

@@ -132,9 +132,9 @@ Open `services.js` and read the `getHello()` function that makes this work — i
 
 ## Files in This Project
 
-- **src/services.js** - Your working file - implement the API functions here
-- **src/post-cli.js** - Application entry point (provided ready-made)
-- **tests/** - Vitest tests to verify your functions work correctly
+- **post-cli/src/services.js** - Your working file - implement the API functions here
+- **post-cli/src/post-cli.js** - Application entry point (provided ready-made)
+- **post-cli/tests/** - Vitest tests to verify your functions work correctly
 
 ## Testing Your Functions
 

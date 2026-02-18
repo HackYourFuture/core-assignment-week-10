@@ -1,25 +1,26 @@
 # Post CLI - Project Structure
 
 ```plaintext
-post-cli/
+task-2/
 │
 ├── README.md                    # Main documentation, API reference, learning objectives
 ├── README_BACKGROUND.md         # How the CLI, tests, and services fit together
 ├── PROJECT_STRUCTURE.md         # This file
 │
-├── package.json                 # Dependencies and helpful npm scripts
-├── vitest.config.js             # Vitest test runner configuration
-├── .gitignore                   # Git ignore rules
-│
-├── src/                         # Source code
-│   ├── post-cli.js              # Interactive CLI application entry point
-│   ├── services.js              # Trainee working file with API functions to implement
-│   └── services.starter.js      # Original starter file (backup copy)
-│
-└── tests/                       # Vitest test files
-    ├── test-get.test.js         # Test GET request functions
-    ├── test-post.test.js        # Test POST request functions (+ loginUser)
-    └── test-crud.test.js        # Test all CRUD operations
+└── post-cli/
+    ├── package.json                 # Dependencies and helpful npm scripts
+    ├── vitest.config.js             # Vitest test runner configuration
+    ├── .gitignore                   # Git ignore rules
+    │
+    ├── src/                         # Source code
+    │   ├── post-cli.js              # Interactive CLI application entry point
+    │   ├── services.js              # Trainee working file with API functions to implement
+    │   └── services.starter.js      # Original starter file (backup copy)
+    │
+    └── tests/                       # Vitest test files
+        ├── test-get.test.js         # Test GET request functions
+        ├── test-post.test.js        # Test POST request functions (+ loginUser)
+        └── test-crud.test.js        # Test all CRUD operations
 ```
 
 ## File Purposes
@@ -28,9 +29,9 @@ post-cli/
 
 - **README.md** - Start here! Complete guide to the exercise
 - **README_BACKGROUND.md** - Explains how the CLI, tests, and token system work
-- **src/services.js** - Implement your fetch API functions here
-- **src/post-cli.js** - Interactive CLI app that imports and runs your functions
-- **tests/** - Vitest tests to verify your code
+- **post-cli/src/services.js** - Implement your fetch API functions here
+- **post-cli/src/post-cli.js** - Interactive CLI app that imports and runs your functions
+- **post-cli/tests/** - Vitest tests to verify your code
 
 ### Key Files Explained
 
