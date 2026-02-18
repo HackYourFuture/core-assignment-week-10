@@ -1,9 +1,6 @@
 // Change base URL for API requests to the local IP of the Post Central API server
 const BASE_URL = 'http://localhost:3000';
 
-// Stub error for unimplemented functions - gives trainees a clear error message
-const NOT_IMPLEMENTED = new Error('Not implemented');
-
 // ============================================================================
 // AUTH TOKEN - Stored after login/register, sent with every request
 // ============================================================================
@@ -28,6 +25,25 @@ const setToken = (token) => {
 const getToken = () => authToken;
 
 // ============================================================================
+// HELLO ENDPOINT - Already implemented! Read this as a reference for your code.
+// ============================================================================
+
+/**
+ * Get a hello message from Post Central
+ * Method: GET | Endpoint: /posts/hello | Auth: No
+ * Response: { id: number, user: string, text: string, timestamp: string }
+ */
+const getHello = async () => {
+  const response = await fetch(`${BASE_URL}/posts/hello`);
+  if (!response.ok) {
+    throw new Error(
+      `Failed to get hello: HTTP ${response.status} ${response.statusText}`
+    );
+  }
+  return await response.json();
+};
+
+// ============================================================================
 // STAGE 1: GET REQUEST - Read data from the server
 // ============================================================================
 
@@ -37,12 +53,11 @@ const getToken = () => authToken;
  * Response: { user: string }
  */
 const getMe = async () => {
-  // TODO - Replace the next line with your implementation
-  throw NOT_IMPLEMENTED;
+  // TODO
 };
 
 // ============================================================================
-// STAGE 2: POST REQUEST - Send data to the server
+// STAGE 2: POST REQUEST - createUser() is provided as a reference. Implement loginUser().
 // ============================================================================
 
 /**
@@ -51,7 +66,7 @@ const getMe = async () => {
  * Body: { name, password }
  * Response: { user: string, token: string }
  */
-const registerUser = async (name, password) => {
+const createUser = async (name, password) => {
   const response = await fetch(`${BASE_URL}/users/register`, {
     method: 'POST',
     headers: {
@@ -74,8 +89,7 @@ const registerUser = async (name, password) => {
  * Response: { user: string, token: string }
  */
 const loginUser = async (name, password) => {
-  // TODO - Replace the next line with your implementation
-  throw NOT_IMPLEMENTED;
+  // TODO
 };
 
 // ============================================================================
@@ -89,8 +103,7 @@ const loginUser = async (name, password) => {
  * Response: { id: number, text: string, user: string }
  */
 const createPost = async (text) => {
-  // TODO - Replace the next line with your implementation
-  throw NOT_IMPLEMENTED;
+  // TODO
 };
 
 /**
@@ -99,8 +112,7 @@ const createPost = async (text) => {
  * Response: Array of { id, text, user }
  */
 const getPosts = async () => {
-  // TODO - Replace the next line with your implementation
-  throw NOT_IMPLEMENTED;
+  // TODO
 };
 
 /**
@@ -110,28 +122,25 @@ const getPosts = async () => {
  * Response: { id: number, text: string }
  */
 const updatePost = async (id, text) => {
-  // TODO - Replace the next line with your implementation
-  throw NOT_IMPLEMENTED;
+  // TODO
 };
 
 /**
  * Delete current user
  * Method: DELETE | Endpoint: /users/me | Auth: Yes
- * No response body
+ * Response: { user: string, message: string }
  */
 const deleteUser = async () => {
-  // TODO - Replace the next line with your implementation
-  throw NOT_IMPLEMENTED;
+  // TODO
 };
 
 /**
  * Delete a post
  * Method: DELETE | Endpoint: /posts/:id | Auth: Yes
- * No response body
+ * Response: { id: number, text: string, message: string }
  */
 const deletePost = async (id) => {
-  // TODO - Replace the next line with your implementation
-  throw NOT_IMPLEMENTED;
+  // TODO
 };
 
 // ============================================================================
@@ -140,13 +149,14 @@ const deletePost = async (id) => {
 
 export {
   createPost,
+  createUser,
   deletePost,
   deleteUser,
+  getHello,
   getMe,
   getPosts,
   getToken,
   loginUser,
-  registerUser,
   setToken,
   updatePost,
 };

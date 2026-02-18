@@ -1,32 +1,21 @@
 /**
  * Vitest tests for POST request functions
- * Tests the trainee's implementation of registerUser(), loginUser(), and createPost()
+ * Tests the trainee's implementation of createUser(), loginUser(), and createPost()
  *
  * Uses mocked fetch to verify trainees are making correct API calls
  * without requiring a running API server.
- *
- * NOTE: Change the import path to test trainee code:
- * - Testing starter: import from '../services.js'
- * - Testing solution: import from '../services-solution.js'
  */
 
-import { existsSync } from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const traineeFetchersPath = path.join(__dirname, '../src/services.js');
-const solutionFetchersPath = path.join(
-  __dirname,
-  '../src/services-solution.js'
-);
-
 // Import fetcher functions
-const solutionExists = existsSync(solutionFetchersPath); // Set to false to test starter code
-const { createPost, registerUser, loginUser, setToken } = solutionExists
-  ? await import(solutionFetchersPath)
-  : await import(traineeFetchersPath);
+let services;
+try {
+  services = await import('../src/services.solution.js');
+} catch {
+  services = await import('../src/services.js');
+}
+const { createPost, createUser, loginUser, setToken } = services;
 
 describe('POST Functions', () => {
   let fetchMock;
@@ -42,7 +31,7 @@ describe('POST Functions', () => {
     setToken(null);
   });
 
-  describe('registerUser()', () => {
+  describe('createUser()', () => {
     it('should make POST request to /users/register with correct data', async () => {
       const testName = 'Alice';
       const testPassword = 'testpass123';
@@ -53,7 +42,7 @@ describe('POST Functions', () => {
         json: async () => ({ user: testName, token: 'jwt-token-abc' }),
       });
 
-      await registerUser(testName, testPassword);
+      await createUser(testName, testPassword);
 
       // Verify fetch was called with correct parameters
       expect(fetchMock).toHaveBeenCalledWith(
@@ -79,7 +68,7 @@ describe('POST Functions', () => {
         json: async () => mockData,
       });
 
-      const data = await registerUser(testName, 'testpass123');
+      const data = await createUser(testName, 'testpass123');
 
       // Verify the function returns the expected data structure
       expect(data).toBeDefined();
@@ -96,7 +85,7 @@ describe('POST Functions', () => {
         json: async () => ({ user: 'Alice', token: 'jwt-token-abc' }),
       });
 
-      await registerUser('Alice', 'testpass123');
+      await createUser('Alice', 'testpass123');
 
       // Check that headers include Content-Type
       const callArgs = fetchMock.mock.calls[0][1];
@@ -114,7 +103,7 @@ describe('POST Functions', () => {
       });
 
       // Verify the function throws an error
-      await expect(registerUser('', '')).rejects.toThrow();
+      await expect(createUser('', '')).rejects.toThrow();
     });
   });
 

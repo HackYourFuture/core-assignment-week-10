@@ -4,38 +4,27 @@
  *
  * Uses mocked fetch to verify trainees are making correct API calls
  * without requiring a running API server.
- *
- * NOTE: Change the import path to test trainee code:
- * - Testing starter: import from '../services.js'
- * - Testing solution: import from '../services-solution.js'
  */
 
-import { existsSync } from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const traineeFetchersPath = path.join(__dirname, '../src/services.js');
-const solutionFetchersPath = path.join(
-  __dirname,
-  '../src/services-solution.js'
-);
-
 // Import fetcher functions
-const solutionExists = existsSync(solutionFetchersPath); // Set to false to test starter code
+let services;
+try {
+  services = await import('../src/services.solution.js');
+} catch {
+  services = await import('../src/services.js');
+}
 const {
   createPost,
-  registerUser,
+  createUser,
   deletePost,
   deleteUser,
   getMe,
   getPosts,
   setToken,
   updatePost,
-} = solutionExists
-  ? await import(solutionFetchersPath)
-  : await import(traineeFetchersPath);
+} = services;
 
 describe('Complete CRUD Operations', () => {
   let fetchMock;
@@ -66,7 +55,7 @@ describe('Complete CRUD Operations', () => {
     });
 
     // CREATE: Register a user
-    let data = await registerUser(testUser, testPassword);
+    let data = await createUser(testUser, testPassword);
     expect(data.user).toBe(testUser);
     expect(data.token).toBeDefined();
     expect(fetchMock).toHaveBeenLastCalledWith(
@@ -180,7 +169,7 @@ describe('Complete CRUD Operations', () => {
     // Mock DELETE user response
     fetchMock.mockResolvedValueOnce({
       ok: true,
-      status: 204,
+      status: 200,
     });
 
     // DELETE: Remove the user
@@ -228,7 +217,7 @@ describe('Complete CRUD Operations', () => {
 
     fetchMock.mockResolvedValueOnce({
       ok: true,
-      status: 204,
+      status: 200,
     });
 
     await deleteUser();
@@ -301,6 +290,6 @@ describe('Complete CRUD Operations', () => {
     });
 
     // Verify any function throws error on API failure
-    await expect(registerUser('Test', 'pass')).rejects.toThrow();
+    await expect(createUser('Test', 'pass')).rejects.toThrow();
   });
 });

@@ -3,13 +3,9 @@
   "version": "1.0.0",
   "description": "HackYourFuture Core Program, week 10 assignment",
   "scripts": {
-    "task2": "node task-2/src/post-cli.js",
     "test": "vitest",
     "test:run": "vitest run",
     "test:cocktail": "vitest run cocktail",
-    "test:get": "vitest run test-get",
-    "test:post": "vitest run test-post",
-    "test:crud": "vitest run test-crud",
     "postinstall": "node .hyf/postinstall/postinstall.js"
   },
   "keywords": [],
