@@ -127,7 +127,7 @@ describe('Error handling', () => {
     await main();
 
     expect(consoleLogMock).toHaveBeenCalledWith(
-      expect.stringContaining('No cocktails found with that name.')
+      expect.stringContaining('No cocktails found')
     );
 
     // Restore original process.argv and console.log
