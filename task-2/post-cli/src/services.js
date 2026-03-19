@@ -1,5 +1,5 @@
 // Change base URL for API requests to the local IP of the Post Central API server
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = "https://postcentral.hyf.dev";
 
 // ============================================================================
 // AUTH TOKEN - Stored after login/register, sent with every request
@@ -17,6 +17,12 @@ let authToken = null;
 const setToken = (token) => {
   authToken = token;
 };
+
+function authHeader(token) {
+  return {
+    Authorization: `Bearer ${token}`,
+  };
+}
 
 /**
  * Get the current token. Use this to build the Authorization header
@@ -37,7 +43,7 @@ const getHello = async () => {
   const response = await fetch(`${BASE_URL}/posts/hello`);
   if (!response.ok) {
     throw new Error(
-      `Failed to get hello: HTTP ${response.status} ${response.statusText}`
+      `Failed to get hello: HTTP ${response.status} ${response.statusText}`,
     );
   }
   return await response.json();
@@ -53,7 +59,17 @@ const getHello = async () => {
  * Response: { user: string }
  */
 const getMe = async () => {
-  // TODO
+  const response = await fetch(`${BASE_URL}/users/me`, {
+    headers: {
+      ...authHeader(getToken()),
+    },
+  });
+  if (!response.ok) {
+    throw new Error(
+      `Failed to get user info: HTTP ${response.status} ${response.statusText}`,
+    );
+  }
+  return await response.json();
 };
 
 // ============================================================================
@@ -68,15 +84,15 @@ const getMe = async () => {
  */
 const createUser = async (name, password) => {
   const response = await fetch(`${BASE_URL}/users/register`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({ name, password }),
   });
   if (!response.ok) {
     throw new Error(
-      `Failed to create user: HTTP ${response.status} ${response.statusText}`
+      `Failed to create user: HTTP ${response.status} ${response.statusText}`,
     );
   }
   return await response.json();
@@ -89,7 +105,21 @@ const createUser = async (name, password) => {
  * Response: { user: string, token: string }
  */
 const loginUser = async (name, password) => {
-  // TODO
+  const response = await fetch(`${BASE_URL}/users/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name, password }),
+  });
+  if (!response.ok) {
+    throw new Error(
+      `Failed to login user: HTTP ${response.status} ${response.statusText}`,
+    );
+  }
+  const data = await response.json();
+  setToken(data.token);
+  return data;
 };
 
 // ============================================================================
@@ -103,7 +133,20 @@ const loginUser = async (name, password) => {
  * Response: { id: number, text: string, user: string }
  */
 const createPost = async (text) => {
-  // TODO
+  const response = await fetch(`${BASE_URL}/posts`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      ...authHeader(getToken()),
+    },
+    body: JSON.stringify({ text }),
+  });
+  if (!response.ok) {
+    throw new Error(
+      `Failed to create post: HTTP ${response.status} ${response.statusText}`,
+    );
+  }
+  return await response.json();
 };
 
 /**
@@ -112,7 +155,17 @@ const createPost = async (text) => {
  * Response: Array of { id, text, user }
  */
 const getPosts = async () => {
-  // TODO
+  const response = await fetch(`${BASE_URL}/posts/me`, {
+    headers: {
+      ...authHeader(getToken()),
+    },
+  });
+  if (!response.ok) {
+    throw new Error(
+      `Failed to get posts: HTTP ${response.status} ${response.statusText}`,
+    );
+  }
+  return await response.json();
 };
 
 /**
@@ -122,7 +175,20 @@ const getPosts = async () => {
  * Response: { id: number, text: string }
  */
 const updatePost = async (id, text) => {
-  // TODO
+  const response = await fetch(`${BASE_URL}/posts/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      ...authHeader(getToken()),
+    },
+    body: JSON.stringify({ text }),
+  });
+  if (!response.ok) {
+    throw new Error(
+      `Failed to update post: HTTP ${response.status} ${response.statusText}`,
+    );
+  }
+  return await response.json();
 };
 
 /**
@@ -131,7 +197,18 @@ const updatePost = async (id, text) => {
  * Response: { user: string, message: string }
  */
 const deleteUser = async () => {
-  // TODO
+  const response = await fetch(`${BASE_URL}/users/me`, {
+    method: "DELETE",
+    headers: {
+      ...authHeader(getToken()),
+    },
+  });
+  if (!response.ok) {
+    throw new Error(
+      `Failed to delete user: HTTP ${response.status} ${response.statusText}`,
+    );
+  }
+  return await response.json();
 };
 
 /**
@@ -140,7 +217,18 @@ const deleteUser = async () => {
  * Response: { id: number, text: string, message: string }
  */
 const deletePost = async (id) => {
-  // TODO
+  const response = await fetch(`${BASE_URL}/posts/${id}`, {
+    method: "DELETE",
+    headers: {
+      ...authHeader(getToken()),
+    },
+  });
+  if (!response.ok) {
+    throw new Error(
+      `Failed to delete post: HTTP ${response.status} ${response.statusText}`,
+    );
+  }
+  return await response.json();
 };
 
 // ============================================================================

@@ -177,7 +177,7 @@ describe('Complete CRUD Operations', () => {
     // DELETE: Remove the user
     await deleteUser();
     expect(fetchMock).toHaveBeenLastCalledWith(
-      'http://localhost:3000/users/me',
+      'https://postcentral.hyf.dev/users/me',
       expect.objectContaining({
         method: 'DELETE',
         headers: expect.objectContaining({
