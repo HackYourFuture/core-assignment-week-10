@@ -1,14 +1,14 @@
 // API documentation: https://www.thecocktaildb.com/api.php
 
-import path from 'path';
+import path from "path";
 
-const BASE_URL = 'https://www.thecocktaildb.com/api/json/v1/1';
+const BASE_URL = "https://www.thecocktaildb.com/api/json/v1/1";
 
 // Add helper functions as needed here
 
 export async function main() {
   if (process.argv.length < 3) {
-    console.error('Please provide a cocktail name as a command line argument.');
+    console.error("Please provide a cocktail name as a command line argument.");
     return;
   }
 

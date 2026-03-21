@@ -258,9 +258,9 @@ Serve in: Cocktail Glass
 
 ### Instructions
 
-Add ice, toffee gin, chocolate liqueur and Amaretto to a cocktail shaker and shake vigorously. 
+Add ice, toffee gin, chocolate liqueur and Amaretto to a cocktail shaker and shake vigorously.
 Pour the chocolate syrup into a saucer and dip the top of a martini glass into the sauce. Grate some of the Willie\'s sea salt chocolate into another saucer and dip the coated glass, so the flakes stick to the sauce, creating a chocolate rim!
-Pour the contents of the shaker into your chocolatey glass and sprinkle with more grated chocolate - enjoy!  
+Pour the contents of the shaker into your chocolatey glass and sprinkle with more grated chocolate - enjoy!
 
 Serve in: Cocktail glass
 
@@ -302,4 +302,3 @@ Serve in: Cocktail glass
 Serve without ice. At least the juice shold have room temperature.
 
 Serve in: Collins Glass
-

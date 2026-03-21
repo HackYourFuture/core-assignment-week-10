@@ -1,11 +1,11 @@
-import fs from 'fs/promises';
-import path from 'path';
+import fs from "fs/promises";
+import path from "path";
 
 const __dirname = import.meta.dirname;
-const reportPath = path.join(__dirname, 'report.json');
+const reportPath = path.join(__dirname, "report.json");
 
 try {
-  const reportContent = await fs.readFile(reportPath, 'utf-8');
+  const reportContent = await fs.readFile(reportPath, "utf-8");
   await fs.unlink(reportPath);
 
   const { testResults } = JSON.parse(reportContent);
@@ -14,7 +14,7 @@ try {
   let passedCount = 0;
   let failedCount = 0;
 
-  console.log('Vitest unit test results:\n');
+  console.log("Vitest unit test results:\n");
 
   const passingScore = Number(process.env.PASSING_SCORE || 50);
 
@@ -24,12 +24,12 @@ try {
       const points = match ? Number(match[1]) || 1 : 1;
       maxPoints += points;
       let icon;
-      if (status === 'passed') {
-        icon = '✅';
+      if (status === "passed") {
+        icon = "✅";
         passedCount += 1;
         earnedPoints += points;
       } else {
-        icon = '❌';
+        icon = "❌";
         failedCount += 1;
       }
       console.log(`${icon} ${title}`);
@@ -47,9 +47,9 @@ try {
     passingScore: passingScore,
   };
 
-  await fs.writeFile('score.json', JSON.stringify(results, null, 2));
+  await fs.writeFile("score.json", JSON.stringify(results, null, 2));
   process.exit(0);
 } catch (error) {
-  console.error('Error parsing report JSON:', error);
+  console.error("Error parsing report JSON:", error);
   process.exit(1);
 }
